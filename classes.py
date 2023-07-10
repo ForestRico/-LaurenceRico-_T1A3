@@ -5,7 +5,17 @@ class booking():
         self.datetime = datetime
         self.service_type = service_type
 
+    def booking_input(self):
+        self.customer_name = input("Enter your fullname.")
+        self.contact_details = input("Enter your preferred contact details.")
+        # self.datetime = input("")
+        self.service_type = input("Please type in service type: ")
         
+
+    def introduce_service(self): 
+        print("Your service type is : " + self.service_type)
+
+    
 
 
 

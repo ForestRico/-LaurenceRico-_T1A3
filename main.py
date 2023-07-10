@@ -9,19 +9,22 @@ def menu():
         print("Thank you for visiting us!")
     else: 
         print("Invalid Input")
-        
-# def booking_system():
-#     if booking_service == True:
-#         input("")
 
 
+p1 = booking("A", "B", "C", "D")
 
-
-
+booking_bank = []
 
 booking_service = True
 menu()
-booking_input()
+p1.booking_input()
+p1.introduce_service()
+booking_bank.append(p1)
+
+for element in booking_bank:
+    print(element)
+
+
 
 
 

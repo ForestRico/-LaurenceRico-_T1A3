@@ -8,17 +8,10 @@ class Booking():
 
     def __str__(self):
         return f"Booking : {self.customer_name}, {self.customer_phone}, {self.date}, {self.time}, {self.service_type}"
-
-# class Booking_system():
-#     def __init__(self):
-#         # self.bookings
-
-
-#     def show_bookings(self):
-#         for bookings in booking_data:
-#             print(bookings)
     
-booking_data = []
+booking_storage = {}
+
+
 
 
 def booking_menu():
@@ -29,14 +22,29 @@ def booking_menu():
         print("3. Exit")
         choice = input("Enter Choice (1-3): ")
         if choice == "1":
+            booking_data = {}
             customer_name = input("Please enter your fullname: ")
             customer_phone = input("Please enter your phone number: ")
             date = input("Please enter the date DD-MM-YY: ")
             time = input("Please enter the time HH-MM: ")
             service_type = input("Please enter service type: ")
-            
-            c1 = Booking(customer_name, customer_phone, date, time, service_type)
-            booking_data.append(c1)
+
+            booking_data["name"] = customer_name
+            booking_data["phone"] = customer_phone
+            booking_data["date_e"] = date
+            booking_data["time_e"] = time
+            booking_data["service"] = service_type
+
+            booking_storage[customer_name] = booking_data
+            print(booking_storage[customer_name])
+
+            # booking_storage[customer_name] = booking_data
+            # print(booking_data[customer_name])
+
+
+
+            # c1 = Booking(customer_name, customer_phone, date, time, service_type)
+            # booking_data.append(c1)
 
         elif choice == "2":
             for index, bookings in enumerate(booking_data):

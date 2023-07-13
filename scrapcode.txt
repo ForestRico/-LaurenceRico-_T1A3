@@ -1,0 +1,76 @@
+# editRow = int(input("\nWhich row would you like to change? Enter 1 - " + str(len(booking_storage)-1) + " :" ))
+# print("Please enter the new details for each of the following: ")
+
+# for i in range(len(booking_storage[0])):
+#     newDetails = input("Enter new data for " + str(booking_storage[0][i] + " :"))
+#     booking_storage[editRow][i] = newDetails
+
+# print("\nPlease see the details of the new file below: ")
+# for i in range (len(booking_storage)):
+#     print("Row " + str(i) + " :" + str(booking_storage[i]))
+
+# changeCSV = input("\nWould you like to make the changes to the csv file? Y/N").lower()
+
+# # if changeCSV == "y":
+# #     with open("booking.csv", "w+") as csvfile:
+
+
+def edit_booking_list():
+     # with open('bookings.csv', mode='r') as csvfile:
+    #     reader = csv.DictReader(csvfile)
+    #     bookings = list(reader)       
+
+    #     editRow = int(input("\nChoose which booking number you would like to edit. Enter 1 - " + str(len(bookings)) + " :"))
+    #     if editRow in range(1, len(bookings) + 1):
+    #         print("Please enter the new details for each of the following: ")
+    #         new_booking = bookings[editRow - 1]
+
+    #     # editRow = int(input("\nChoose which boooking number you would like to edit. Enter 1 - " + str(len(booking_storage)) + " :"))
+    #     # # prompts the user to input the Booking number they want to edit. Converts user input into an integer and assigns it ot the variable editRow
+    #     # if editRow in range(1, len(booking_storage) + 1):
+    #     #     # if statement checks if the user input "editrow" is within the range of 1 (not lower than 0) and the maximum length of elements within the booking storage  
+    #     #     print("Please enter the new details for each of the following: ")
+    #     #     new_booking = booking_storage[list(booking_storage.keys())[editRow - 1]]
+    #     #     # retrives the booking object to be edited from "booking_storage = {}" based on the selected booking number/
+    #     #     # it uses 'list(booking_storage.keys())[editRow - 1] to access the key (customer_name) associated with the selected booking'
+
+    #         new_booking.customer_name = input("Enter new customer name: ")
+    #         new_booking.customer_phone = input("Enter new customer phone: ")
+    #         new_booking.date = input("Enter new date (DD-MM-YY): ")
+    #         new_booking.time = input("Enter new time (HH-MM): ")
+    #         service_choice = input("Enter new service type(s) separated by commas (1-5): ")
+    #         service_choices = service_choice.split(",")
+    #         new_booking.service_types = ", ".join(service_type_dict[choice] for choice in service_choices)
+    #         new_booking.cost = sum(service_package[choice] for choice in service_choices)
+    #         print("\nPlease see the details of the updated booking below: ")
+    #         print(new_booking)
+    #         changeCSV = input("\nWould you like to make the changes to the CSV file? (Y/N): ").lower()
+    #         if changeCSV == "y":
+    #             print("\n--- Changes have successfully been made! --- ")
+    #             with open('bookings.csv', mode='w') as csvfile:
+    #                 fieldnames = booking_storage[list(booking_storage.keys())[0]].__dict__.keys()
+    #                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    #                 writer.writeheader()
+    #                 for row in booking_storage.values():
+    #                     writer.writerow(row.__dict__)
+
+
+def find_booking()
+
+# name_input = input("Please enter name associated with Booking: ")
+# found_booking = False
+# while not found_booking:
+#     for name_find in booking_storage:
+#         if name_find == name_input:    
+#             print(booking_storage[name_input])
+#             found_booking = True
+#             break 
+#     if not found_booking:
+#         print("Name and booking not found")
+#         name_input = input("Please enter a valid name associated with a booking")
+
+def show_booking_list()
+# for index, bookings in enumerate(booking_storage.values()):
+#     print("-----------------")
+#     print(f"Booking {index+1}: {bookings}")
+#     print("-----------------")

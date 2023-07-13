@@ -14,8 +14,6 @@ class Booking():
 
 booking_storage = {}
 
-# booking_system = True
-
 service_package = {
     "1" : 300, 
     "2" : 500,
@@ -77,53 +75,128 @@ def write_to_csv():
 def find_booking():
     name_input = input("Please enter name associated with Booking: ")
     found_booking = False
-    while not found_booking:
-        for name_find in booking_storage:
-            if name_find == name_input:    
-                print(booking_storage[name_input])
+    with open('bookings.csv', mode='r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            if row['customer_name'] == name_input:
+                print("-----------------")
+                print(f"Booking Found!")
+                print(f"Customer Name: {row['customer_name']}")
+                print(f"Customer Phone: {row['customer_phone']}")
+                print(f"Date: {row['date']}")
+                print(f"Time: {row['time']}")
+                print(f"Service Types: {row['service_types']}")
+                print(f"Cost: {row['cost']}")
+                print("-----------------")
                 found_booking = True
-                break 
-        if not found_booking:
-            print("Name and booking not found")
-            name_input = input("Please enter a valid name associated with a booking")
+                break
+    if not found_booking:
+        print("Name and booking not found")
 
 def show_booking_list():
-    for index, bookings in enumerate(booking_storage.values()):
-        print("-----------------")
-        print(f"Booking {index+1}: {bookings}")
-        print("-----------------")
+    with open('bookings.csv', mode='r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for index, row in enumerate(reader):
+            print("-----------------")
+            print(f"Booking {index+1}:")
+            print(f"Customer Name: {row['customer_name']}")
+            print(f"Customer Phone: {row['customer_phone']}")
+            print(f"Date: {row['date']}")
+            print(f"Time: {row['time']}")
+            print(f"Service Types: {row['service_types']}")
+            print(f"Cost: {row['cost']}")
+            print("-----------------")
 
 def edit_booking_list():
-    editRow = int(input("\nChoose which boooking number you would like to edit. Enter 1 - " + str(len(booking_storage)) + " :"))
-    # prompts the user to input the Booking number they want to edit. Converts user input into an integer and assigns it ot the variable editRow
-    if editRow in range(1, len(booking_storage) + 1):
-        # if statement checks if the user input "editrow" is within the range of 1 (not lower than 0) and the maximum length of elements within the booking storage  
-        print("Please enter the new details for each of the following: ")
-        new_booking = booking_storage[list(booking_storage.keys())[editRow - 1]]
-        # retrives the booking object to be edited from "booking_storage = {}" based on the selected booking number/
-        # it uses 'list(booking_storage.keys())[editRow - 1] to access the key (customer_name) associated with the selected booking'
-        new_booking.customer_name = input("Enter new customer name: ")
-        new_booking.customer_phone = input("Enter new customer phone: ")
-        new_booking.date = input("Enter new date (DD-MM-YY): ")
-        new_booking.time = input("Enter new time (HH-MM): ")
-        service_choice = input("Enter new service type(s) separated by commas (1-5): ")
-        service_choices = service_choice.split(",")
-        new_booking.service_types = ", ".join(service_type_dict[choice] for choice in service_choices)
-        new_booking.cost = sum(service_package[choice] for choice in service_choices)
-        print("\nPlease see the details of the updated booking below: ")
-        print(new_booking)
-        changeCSV = input("\nWould you like to make the changes to the CSV file? (Y/N): ").lower()
-        if changeCSV == "y":
-            print("\n--- Changes have successfully been made! --- ")
-            with open('bookings.csv', mode='w') as csvfile:
-                fieldnames = booking_storage[list(booking_storage.keys())[0]].__dict__.keys()
+    with open('bookings.csv', mode='r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        bookings = list(reader)
+
+        editRow = int(input("\nChoose which booking number you would like to edit. Enter 1 - " + str(len(bookings)) + " :"))
+        if editRow in range(1, len(bookings) + 1):
+            print("Please enter the new details for each of the following: ")
+            new_booking = bookings[editRow - 1]
+            
+            new_booking['customer_name'] = input("Enter new customer name: ")
+            new_booking['customer_phone'] = input("Enter new customer phone: ")
+            new_booking['date'] = input("Enter new date (DD-MM-YY): ")
+            new_booking['time'] = input("Enter new time (HH-MM): ")
+            service_choice = input("Enter new service type(s) separated by commas (1-5): ")
+            service_choices = service_choice.split(",")
+            new_booking['service_types'] = ", ".join(service_type_dict[choice] for choice in service_choices)
+            new_booking['cost'] = str(sum(service_package[choice] for choice in service_choices))
+
+            print("\nPlease see the details of the updated booking below: ")
+            print(f"Booking {editRow}:")
+            print(f"Customer Name: {new_booking['customer_name']}")
+            print(f"Customer Phone: {new_booking['customer_phone']}")
+            print(f"Date: {new_booking['date']}")
+            print(f"Time: {new_booking['time']}")
+            print(f"Service Types: {new_booking['service_types']}")
+            print(f"Cost: {new_booking['cost']}")
+            
+            changeCSV = input("\nWould you like to make the changes to the CSV file? (Y/N): ").lower()
+            if changeCSV == "y":
+                with open('bookings.csv', mode='w', newline='') as csvfile:
+                    fieldnames = reader.fieldnames
+                    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                    writer.writeheader()
+                    writer.writerows(bookings)
+  
+def load_booking_list():
+    with open("bookings.csv", mode = "r") as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            booking = Booking(row['customer_name'], row['customer_phone'], row['date'], row['time'], row['service_types'], row['cost'])
+            booking_storage[row['customer_name']] = booking
+    # for index, bookings in enumerate(booking_storage.values()):
+    #     print("-----------------")
+    #     print(f"Booking {index+1}: {bookings}")
+    #     print("-----------------")
+
+def delete_booking():
+    with open('bookings.csv', mode='r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        bookings = list(reader)
+
+        delete_no = int(input("\nChoose which booking number you would like to delete. Enter 1 - " + str(len(bookings)) + " :"))
+
+        if delete_no in range(1, len(bookings) + 1):
+            bookings.pop(delete_no - 1)
+            with open('bookings.csv', mode='w', newline='') as csvfile:
+                fieldnames = reader.fieldnames
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 writer.writeheader()
-                for row in booking_storage.values():
-                    writer.writerow(row.__dict__)
+                writer.writerows(bookings)
+            print("Booking successfully deleted.")
+        else:
+            print("Invalid booking number.")
+
+
+
+# def delete_booking():
+#     delete_no = input("\nChoose which booking number you would like to edit. Enter 1 - " + str(len(bookings)) + " :")
+#     with open('bookings.csv', mode='r') as csvfile:
+#         reader = csv.DictReader(csvfile)
+#         bookings = list(reader)
+
+#         if delete_no in range(1, len(bookings) +1):
+#             bookings.remove(booking)
+#             found_booking = True
+#             break
+
+#     if found_booking:
+#         with open('bookings.csv', mode='w', newline='') as csvfile:
+#             fieldnames = reader.fieldnames
+#             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+#             writer.writeheader()
+#             writer.writerows(bookings)
+#         print("Booking successfully deleted.")
+#     else:
+#         print("Name and booking not found.")
 
 def end_menu():
-    choice = input("\n-----Would you like to return to the menu?-----\n(Enter either Y/N): ").lower()
+    choice = input("\n-----Would you like to return to the menu?-----\nEnter (Y/N): ").lower()
     if choice == ("y"):
         return True
     elif choice == ("n"):
@@ -132,7 +205,7 @@ def end_menu():
         
 def booking_menu():
     while True:
-        print("\nWelcome to Rico's Media & Marketing Services!\n1. Create a Booking\n2. Find a Booking\n3. Show all Bookings\n4. Edit a Booking\n5. Exit")
+        print("\nWelcome to Rico's Media & Marketing Services!\n1. Create a Booking\n2. Find your Booking Details\n3. Show all Bookings\n4. Edit a Booking\n5. Delete a Booking\n6. Exit")
         choice = input("\nEnter a choice (1-5): ")
         if choice == "1":
             create_booking()
@@ -147,6 +220,7 @@ def booking_menu():
 
         elif choice == "3":
             show_booking_list()
+            # load_booking_list()
             if not end_menu():
                 return False
 
@@ -156,7 +230,13 @@ def booking_menu():
             if not end_menu():
                 return False
 
-        elif choice == "5":
+        elif choice =="5":
+            show_booking_list()
+            delete_booking()
+            if not end_menu():
+                return False
+
+        elif choice == "6":
             print("Thanks For Using Our Service!")
             return False
                 

@@ -1,89 +1,11 @@
-class booking(): 
-    def __init__(self, customer_name, contact_details, datetime, service_type):
-        self.customer_name = customer_name
-        self.contact_details = contact_details
-        self.datetime = datetime
-        self.service_type = service_type
+class Booking():
+    def __init__(self, customer_name, customer_phone, date, time, service_types, cost):
+        self.customer_name = customer_name 
+        self.customer_phone = customer_phone
+        self.date = date
+        self.time = time
+        self.service_types = service_types
+        self.cost = cost
 
-    def booking_input(self):
-        self.customer_name = input("Enter your fullname.")
-        self.contact_details = input("Enter your preferred contact details.")
-        # self.datetime = input("")
-        self.service_type = input("Please type in service type: ")
-        
-
-    def introduce_service(self): 
-        print("Your service type is : " + self.service_type)
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class Gun: 
-#     def __init__(self, title, type, select_fire, mag_size):
-#          self.title = title 
-#          self.type = type 
-#          self.select_fire = select_fire 
-#          self.mag_size = mag_size
-    
-#     def is_a_sniper(self):
-#         if self.select_fire == "Bolt Action":
-#             return True
-#         else: 
-#             return False
-        
-    
-# class Booking: 
-#     def __init__(self, client_name, contact_no, service, date):
-#         self.day = client_name
-#         self.time = contact_no
-#         self.service = service
-#         self.date = date 
-
-# class COD:
-#     def __init__(self, title, map, gun, skin, lethal):
-#         self.title = title 
-#         self.map = map
-#         self.gun = gun
-#         self.skin = skin
-#         self.lethal = lethal 
-
-#     def enter_data(self):
-#         self.title = input("Please enter favourite COD Game: ")
-#         self.map = input("COD Map: ")
-#         self.gun = input("COD Gun: ")
-#         self.skin = input("COD Skin: ")
-#         self.lethal = input("COD Lethal: ")
-
-#     def print_data(self):
-#         print("Your favourite COD Game is: " + self.title)
-#         print("Your favourite COD Map is : " + self.map)
-#         print("Your favourite COD Gun is : " + self.gun)
-#         print("Your favourite COD Skin is : " + self.skin)
-#         print("Your favourite COD Lethal is: " + self.lethal)
-
-    
-        
-
-
-
-
-
+    def __str__(self):
+        return f"Booking : {self.customer_name}, {self.customer_phone}, {self.date}, {self.time}, {self.service_types}"

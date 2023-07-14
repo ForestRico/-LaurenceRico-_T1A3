@@ -1,5 +1,5 @@
 import csv
-import datetime
+import re
 
 class Booking():
     def __init__(self, customer_name, customer_phone, date, time, service_types, cost):
@@ -33,18 +33,36 @@ service_type_dict = {
 
 def create_booking(): 
     print("\nTo Book with us we will need your details!\n")
-    customer_name = input("Please enter your fullname: ")
-    customer_phone = input("Please enter your phone number: ")
-    date = input("Please enter the date DD-MM-YY: ")
-    time = input("Please enter the time HH-MM: ")
+    customer_name = input("Please enter your full name: ")
+    
+    while True:
+        customer_phone = input("Please enter your phone number: ")
+        if re.match(r'^\d{10}$', customer_phone):
+            break
+        else:
+            print("Invalid phone number format! Please enter a 10-digit number.")
+    
+    while True:
+        date = input("Please enter the date (DD-MM-YY): ")
+        if re.match(r'^\d{2}-\d{2}-\d{2}$', date):
+            break
+        else:
+            print("Invalid date format! Please enter a valid date in the format DD-MM-YY.")
+    
+    while True:
+        time = input("Please enter the time (HH:MM): ")
+        if re.match(r'^\d{2}:\d{2}$', time):
+            break
+        else:
+            print("Invalid time format! Please enter a valid time in the format HH:MM.")
 
     print("\nPlease enter service type(s):\n1. Photography\n2. Videography\n3. Website Services\n4. Marketing Services\n5. Advertisements")
-    service_choice = input("\nEnter Choice(s) separated by commas (1-5): ")
+    service_choice = input("\nEnter choice(s) separated by commas (1-5): ")
     service_choices = [choice.strip() for choice in service_choice.split(",")]
 
     while not all(choice.isdigit() and choice in service_package for choice in service_choices):
         print("Invalid input. Service choice(s) should be comma-separated numbers (1-5).")
-        service_choice = input("Enter Choice(s) separated by commas (1-5): ")
+        service_choice = input("Enter choice(s) separated by commas (1-5): ")
         service_choices = [choice.strip() for choice in service_choice.split(",")]
 
     price = 0 
@@ -54,14 +72,12 @@ def create_booking():
         if key in service_choices:
             price += service_package[key]
             chosen_services.append(service_type_dict[key])
-    # if key and service_choice(user input) match, then the users choices will append on the chosen_services list 
-            
-    print("\nYou have chosen the following services: ")
-    for services in chosen_services:
-        print(services)
-        service_types = services
 
-    print("\nYour Total Cost is: " + "$" + str(price))
+    print("\nYou have chosen the following services:")
+    for service in chosen_services:
+        print(service)
+
+    print("\nYour Total Cost is: $" + str(price))
     service_types = ", ".join(chosen_services)
 
     cost = price
@@ -127,10 +143,34 @@ def edit_booking_list():
             new_booking = bookings[editRow - 1]
             
             new_booking['customer_name'] = input("Enter new customer name: ")
-            new_booking['customer_phone'] = input("Enter new customer phone: ")
-            new_booking['date'] = input("Enter new date (DD-MM-YY): ")
-            new_booking['time'] = input("Enter new time (HH-MM): ")
-            service_choice = input("Enter new service type(s) separated by commas (1-5): ")
+           
+            while True:
+                customer_phone = input("Enter new customer phone number: ")
+                if re.match(r'^\d{10}$', customer_phone):
+                    new_booking['customer_phone'] = customer_phone
+                    break
+                else:
+                    print("Invalid phone number format! Please enter a 10-digit number.")
+
+            
+            while True:
+                date = input("Please enter the date (DD-MM-YY): ")
+                if re.match(r'^\d{2}-\d{2}-\d{2}$', date):
+                    new_booking['date'] = date
+                    break
+                else:
+                    print("Invalid date format! Please enter a valid date in the format DD-MM-YY.")
+
+            
+            while True:
+                time = input("Please enter the time (HH:MM): ")
+                if re.match(r'^\d{2}:\d{2}$', time):
+                    new_booking['time'] = time
+                    break
+                else:
+                    print("Invalid time format! Please enter a valid time in the format HH:MM.")
+
+            service_choice = input("\nPlease enter new service type(s):\n1. Photography\n2. Videography\n3. Website Services\n4. Marketing Services\n5. Advertisements\nEnter choice separated by commas (1-5): ")
             service_choices = service_choice.split(",")
             new_booking['service_types'] = ", ".join(service_type_dict[choice] for choice in service_choices)
             new_booking['cost'] = str(sum(service_package[choice] for choice in service_choices))

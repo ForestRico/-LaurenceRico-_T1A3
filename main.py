@@ -2,18 +2,6 @@ import csv
 import re
 from classes import Booking
 
-class Booking():
-    def __init__(self, customer_name, customer_phone, date, time, service_types, cost):
-        self.customer_name = customer_name 
-        self.customer_phone = customer_phone
-        self.date = date
-        self.time = time
-        self.service_types = service_types
-        self.cost = cost
-
-    def __str__(self):
-        return f"Booking : {self.customer_name}, {self.customer_phone}, {self.date}, {self.time}, {self.service_types}"
-
 booking_storage = {}
 
 service_package = {
@@ -215,7 +203,7 @@ def delete_booking():
                 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
                 writer.writeheader()
                 writer.writerows(bookings)
-            print("Booking successfully deleted.")
+            print("\nBooking successfully deleted.")
         else:
             print("Invalid booking number.")
 
@@ -226,6 +214,9 @@ def end_menu():
     elif choice == ("n"):
         print("Thanks for using our service!!")
         return False
+    else: 
+        print("\n--Invalid Input please enter either (Y/N)--")
+        return end_menu()
         
 def booking_menu():
     while True:
@@ -263,6 +254,9 @@ def booking_menu():
         elif choice == "6":
             print("Thanks For Using Our Service!")
             return False
-                
+
+
+
+
 booking_menu()
 

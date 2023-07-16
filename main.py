@@ -1,4 +1,5 @@
 import functions
+
 # booking_storage = {}
 
 # service_package = {
@@ -215,41 +216,41 @@ import functions
 #         return end_menu()
         
 # def booking_menu():
-    # while True:
-    #     print("\nWelcome to Rico's Media & Marketing Services!\n1. Create a Booking\n2. Find your Booking Details\n3. Show all Bookings\n4. Edit a Booking\n5. Delete a Booking\n6. Exit")
-    #     choice = input("\nEnter a choice (1-5): ")
-    #     if choice == "1":
-    #         create_booking()
-    #         write_to_csv()
-    #         if not end_menu():
-    #             return False        
+#     while True:
+#         print("\nWelcome to Rico's Media & Marketing Services!\n1. Create a Booking\n2. Find your Booking Details\n3. Show all Bookings\n4. Edit a Booking\n5. Delete a Booking\n6. Exit")
+#         choice = input("\nEnter a choice (1-5): ")
+#         if choice == "1":
+#             create_booking()
+#             write_to_csv()
+#             if not end_menu():
+#                 return False        
     
-    #     elif choice == "2":
-    #         find_booking()
-    #         if not end_menu():
-    #             return False
+#         elif choice == "2":
+#             find_booking()
+#             if not end_menu():
+#                 return False
 
-    #     elif choice == "3":
-    #         show_booking_list()
-    #         # load_booking_list()
-    #         if not end_menu():
-    #             return False
+#         elif choice == "3":
+#             show_booking_list()
+#             # load_booking_list()
+#             if not end_menu():
+#                 return False
 
-    #     elif choice == "4":
-    #         show_booking_list()
-    #         edit_booking_list()
-    #         if not end_menu():
-    #             return False
+#         elif choice == "4":
+#             show_booking_list()
+#             edit_booking_list()
+#             if not end_menu():
+#                 return False
 
-    #     elif choice =="5":
-    #         show_booking_list()
-    #         delete_booking()
-    #         if not end_menu():
-    #             return False
+#         elif choice =="5":
+#             show_booking_list()
+#             delete_booking()
+#             if not end_menu():
+#                 return False
 
-    #     elif choice == "6":
-    #         print("Thanks For Using Our Service!")
-    #         return False
+#         elif choice == "6":
+#             print("Thanks For Using Our Service!")
+#             return False
 
 functions.booking_menu()
 

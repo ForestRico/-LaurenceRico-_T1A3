@@ -9,3 +9,4 @@ class Booking():
 
     def __str__(self):
         return f"Booking : {self.customer_name}, {self.customer_phone}, {self.date}, {self.time}, {self.service_types}"
+    

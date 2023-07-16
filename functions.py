@@ -234,7 +234,6 @@ def booking_menu():
 
         elif choice == "3":
             show_booking_list()
-            # load_booking_list()
             if not end_menu():
                 return False
 
@@ -253,3 +252,6 @@ def booking_menu():
         elif choice == "6":
             print("Thanks For Using Our Service!")
             return False
+        
+        else:
+            print("\n--Invalid Input please enter a number between 1-5--")

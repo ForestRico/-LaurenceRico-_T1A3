@@ -1,5 +1,6 @@
 # Documentation: Rico’s Media and Marketing Service 
 ### [Link to Video Overview](https://youtu.be/zdnLXSXNm_0) 
+### [Link to Repository](https://github.com/ForestRico/-LaurenceRico-_T1A3.git)
 ## __Introduction__
 Rico’s Media and Marketing Service is a program that enables users to book and schedule their media and marketing services. The program was created using the programming language Python and was packaged together into a standalone executable by PyInstaller. This program should be able to run on all Windows Operating Systems as PyInstaller packages the code with the required Python interpreter and standard library modules. To utilise this program, it is as simple as running the booking_app.exe file within this repository. (\GitHub\-LaurenceRico-_T1A3\dist\booking_app.exe). 
 ## __Dependencies:__
